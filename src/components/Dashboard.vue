@@ -1,64 +1,51 @@
 <script setup lang="ts">
     import { ref } from 'vue';
+    import json from '@/data/data.json';
+    import { directions, moveTicket, type Swimlane, type Item } from '@/dataHandling/swimlane';
     
-    const swimList = ref(getData());
+    const data = ref(getData());
+    const swimlanes: Swimlane[] | undefined = data?.value?.swimlanes;
+    const items: Item[] | undefined = data?.value?.items;
 
     function getData() {
-        // Preferably fetch data from database
+        // Should change this to fetch data from database.
+        // GraphQL? SQL?
 
-        return [
-            {
-                id: 1,
-                name: 'Unassigned',
-                items: [
-                    {
-                        id: 1,
-                        name: 'Task 1'
-                    },
-                    {
-                        id: 2,
-                        name: 'Task 2'
-                    },
-                    {
-                        id: 3,
-                        name: 'Task 3'
-                    }
-                ]
-            },
-            {
-                id: 2,
-                name: 'Backlog',
-                items: [
-                    {
-                        id: 4,
-                        name: 'Task 4'
-                    },
-                    {
-                        id: 5,
-                        name: 'Task 5'
-                    },
-                    {
-                        id: 6,
-                        name: 'Task 6'
-                    }
-                ]
-            },
-            {
-                name: 'In progress'
-            },
-            {
-                name: 'Done'
-            }
-        ]   
+        if (json) {
+            return json;
+        }
+
+        console.error("No data found");
+        return null;
+    }
+
+    function getTicket(id: number) {
+        const item = items?.find((item: Item) => item.id === id);
+        if (!item) {
+            throw new Error(`No item found with id ${id}`);
+        }
+        return item;
     }
 </script>
 
 <template>
     <section class="overview">
-        <div class="swimlane" v-for="swimlane in swimList" :key="swimlane.id">
+        <div class="swimlane" v-if="swimlanes" v-for="swimlane in swimlanes" :key="swimlane.id">
             <h2>{{ swimlane.name }}</h2>
-            <ul class="swimlaneoverview" v-for="item in swimlane.items" :key="item.id">
-                <li class="ticket">{{ item.name }}</li>
+            <ul class="swimlaneoverview" v-if="swimlane && items" v-for="itemId in swimlane.items">
+                <li class="ticket" v-if="itemId" :key="itemId">
+                    <span>{{ getTicket(itemId)?.name }}</span>
+                    <div class="actions">
+                        <button
+                            class="btn" 
+                            @click="moveTicket(swimlanes, items, itemId, swimlane.id, directions.left)" 
+                            aria-label="Move left">&LeftArrow;</button>
+                        <button
+                            class="btn" 
+                            @click="moveTicket(swimlanes, items, itemId, swimlane.id, directions.right)"
+                            aria-label="Move right">&RightArrow;</button>
+                    </div>
+                </li>
             </ul>
         </div>
     </section>
@@ -87,10 +74,24 @@
         }
     }
     .ticket {
+        display: flex;
         padding: 5px;
         border: 1px solid var(--ticket-color);
         border-radius: 7.5px;
         margin-bottom: 10px;
-        cursor: grab;
+
+        .actions {
+            flex-grow: 1;
+            display: flex;
+            justify-content: flex-end;
+
+            button {
+                padding: 2px 5px;
+                border: none;
+                border-bottom: 2px solid gray;
+                margin-right: 2px;
+                border-radius: 2px;
+            }
+        }
     }
 </style>

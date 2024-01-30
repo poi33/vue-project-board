@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import Dashboard from './components/dashboard.vue'
+    import Dashboard from './components/Dashboard.vue';
 
 function newTicket() {
     //Open new ticket modal

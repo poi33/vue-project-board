@@ -1,0 +1,48 @@
+{
+    "swimlanes": [
+        {
+            "id": 1,
+            "name": "Unassigned",
+            "items": [1, 2, 3]
+        },
+        {
+            "id": 2,
+            "name": "Backlog",
+            "items": [4, 5, 6]
+        },
+        {
+            "id": 3,
+            "name": "In progress"
+        },
+        {
+            "id": 4,
+            "name": "Done"
+        }
+    ],
+    "items": [
+        {
+            "id": 1,
+            "name": "Task 1"
+        },
+        {
+            "id": 2,
+            "name": "Task 2"
+        },
+        {
+            "id": 3,
+            "name": "Task 3"
+        },
+        {
+            "id": 4,
+            "name": "Task 4"
+        },
+        {
+            "id": 5,
+            "name": "Task 5"
+        },
+        {
+            "id": 6,
+            "name": "Task 6"
+        }
+    ]
+}
