@@ -1,47 +1,26 @@
 <script setup lang="ts">
     import { ref } from 'vue';
-    import json from '@/data/data.json';
-    import { Ticket, getLane, type Swimlane } from '@/dataHandling/ticket';
+    import Ticket from '@/dataHandling/Ticket';
+    import Lane from '@/dataHandling/Lane';
+    import { getJsonData } from '@/dataHandling/readfile';
     
-    const data = ref(getData());
-    const lanes: Swimlane[] | undefined = data.value?.lanes;
-    const tickets: Ticket[] | undefined = data.value?.tickets;
-
-    function getData() {
-        // Should change this to fetch data from database.
-        // GraphQL? SQL?
-        // For now, we will use a json file.
-
-        if (json.tickets && json.lanes) {
-            const tickets = json.tickets.map((el: any) => {
-                    return new Ticket(
-                        el.id,
-                        el.name,
-                        el.lane,
-                        el.description,
-                        el.status);
-            });
-            const lanes = json.lanes.map((el: any) => {
-                return el;
-            });
-
-            return { tickets, lanes };
-        }
-
-        console.error("No data found");
-        return null;
-    }
+    const data = ref(getJsonData());
+    const lanes: Map<number, Lane> | undefined = data.value?.lanes;
+    const tickets: Map<number, Ticket> | undefined = data.value?.tickets;
 </script>
 
 <template>
     <div class="dashboard">
-        <section class="overview" v-if="tickets">
-            <div class="ticket" :key="ticket.id" v-for="ticket in tickets">
-                <h2 class="headline">{{ ticket.name }}</h2>
+        <section class="overview">
+            <div class="ticket" :key="ticketid" v-for="(ticket, ticketid) in tickets">
+                <h2 class="headline">{{ ticket[1].name }}</h2>
                 <div class="actions">
                     <div class="lane" v-if="lanes" role="select">
-                        <div v-if="ticket.lane">
-                            {{ getLane(lanes, ticket.id).name }}
+                        <div v-if="ticket[1].lane">
+                            {{ lanes.get(ticket[1].lane)?.name}}
+                        </div>
+                        <div v-else>
+                            {{ Lane.getDefaultLane().name }}
                         </div>
                     </div>
                 </div>
@@ -54,21 +33,22 @@
     .dashboard {
         /* 100vh - hader-height - body padding top/bottom - footer */
         height: calc(100vh -(var(--header-height) + var(--footer-height) + 20px));
+        overflow-x: scroll;
     }
     .overview {
         display: flex;
-        align-items: start;
+        align-content: start;
         gap: 5px;
         flex-wrap: wrap;
-        flex-direction: row;
+        flex-direction: column;
+        height: 100%;
     }
     .ticket {
-        display: inline-block;
-        padding: 10px;
-        border: 1px solid var(--ticket-color);
+        padding: 20px;
+        background-color: var(--ticket-color);
+        color: var(--ticket-text);
         border-radius: 7.5px;
-        flex-grow: 1;
-        min-width: 200px;
+        width: 300px;
 
         .headline {
             font-size: 1.2rem;

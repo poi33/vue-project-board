@@ -11,6 +11,11 @@
         {
             "id": 3,
             "name": "Done"
+        },
+        {
+            "id": 4,
+            "name": "Unassigned",
+            "isDefault": true
         }
     ],
     "tickets": [
@@ -32,7 +37,7 @@
             "id": 3,
             "name": "Task 3",
             "description": "Test",
-            "lane": 0
+            "lane": 1
         },
         {
             "id": 4,

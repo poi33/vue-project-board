@@ -1,28 +1,23 @@
-export type Swimlane = {
-    id: number,
-    name: string,
-}
-
-export type TicketData = {
+type TicketData = {
     id: number;
     name: string;
-    lane: id;
+    lane?: number;
     description?: string;
     status?: string;
 }
 
-export function getLane(lanes: Swimlane[], laneid: number): Swimlane {
-    return lanes.find(lane => lane.id === laneid);
-}
-
-export class Ticket implements TicketData {
+/*
+ * The ticket class. Represents a single task in the board.
+ * Modeled to be a mirror of the data in the database.
+ */
+export default class Ticket implements TicketData {
     public id: number;
     public name: string;
-    public lane: number;
+    public lane?: number;
     public description?: string;
     public status?: string;
 
-    constructor(id: number, name: string, lane: number, description?: string, status?: string) {
+    constructor(id: number, name: string, lane?: number, description?: string, status?: string) {
         this.id = id;
         this.name = name;
         this.lane = lane;

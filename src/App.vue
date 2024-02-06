@@ -26,32 +26,34 @@ function newTicket() {
 
 <style>
 main {
+    padding: 10px;
     background-color: var(--color-bg);
-    color: #fff;
+    color: var(--color-text);
 }
 header {
     display: grid;
-    grid-template-columns: minmax(100px, 1fr) 1fr;
+    grid-template-columns: 1fr 1fr;
     height: 75px;
+    align-items: center;
 
     h1 {
         margin-bottom: 5px;
     }
+
     .actions {
+        justify-self: end;
+
         .ticket-btn {
-            background-color: var(--ticket-color);
-            box-shadow: 0 2px 0 0 var(--ticket-color-active);
+            background-color: var(--btn-bg);
             border: none;
-            border-radius: 5px;
-            padding: 5px 10px;
-            color: #fff;
+            border-radius: 30px;
+            padding: 10px 15px;
             font-size: 1rem;
-            font-weight: bold;
-            cursor: pointer;
+            color: var(--btn-text);
 
             &:active {
                 margin-top: 2px;
-                background-color: var(--ticket-color-active);
+                box-shadow: none;
             }
         }
     }
