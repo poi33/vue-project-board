@@ -1,97 +1,78 @@
 <script setup lang="ts">
     import { ref } from 'vue';
     import json from '@/data/data.json';
-    import { directions, moveTicket, type Swimlane, type Item } from '@/dataHandling/swimlane';
+    import { Ticket, getLane, type Swimlane } from '@/dataHandling/ticket';
     
     const data = ref(getData());
-    const swimlanes: Swimlane[] | undefined = data?.value?.swimlanes;
-    const items: Item[] | undefined = data?.value?.items;
+    const lanes: Swimlane[] | undefined = data.value?.lanes;
+    const tickets: Ticket[] | undefined = data.value?.tickets;
 
     function getData() {
         // Should change this to fetch data from database.
         // GraphQL? SQL?
+        // For now, we will use a json file.
 
-        if (json) {
-            return json;
+        if (json.tickets && json.lanes) {
+            const tickets = json.tickets.map((el: any) => {
+                    return new Ticket(
+                        el.id,
+                        el.name,
+                        el.lane,
+                        el.description,
+                        el.status);
+            });
+            const lanes = json.lanes.map((el: any) => {
+                return el;
+            });
+
+            return { tickets, lanes };
         }
 
         console.error("No data found");
         return null;
     }
-
-    function getTicket(id: number) {
-        const item = items?.find((item: Item) => item.id === id);
-        if (!item) {
-            throw new Error(`No item found with id ${id}`);
-        }
-        return item;
-    }
 </script>
 
 <template>
-    <section class="overview">
-        <div class="swimlane" v-if="swimlanes" v-for="swimlane in swimlanes" :key="swimlane.id">
-            <h2>{{ swimlane.name }}</h2>
-            <ul class="swimlaneoverview" v-if="swimlane && items" v-for="itemId in swimlane.items">
-                <li class="ticket" v-if="itemId" :key="itemId">
-                    <span>{{ getTicket(itemId)?.name }}</span>
-                    <div class="actions">
-                        <button
-                            class="btn" 
-                            @click="moveTicket(swimlanes, items, itemId, swimlane.id, directions.left)" 
-                            aria-label="Move left">&LeftArrow;</button>
-                        <button
-                            class="btn" 
-                            @click="moveTicket(swimlanes, items, itemId, swimlane.id, directions.right)"
-                            aria-label="Move right">&RightArrow;</button>
+    <div class="dashboard">
+        <section class="overview" v-if="tickets">
+            <div class="ticket" :key="ticket.id" v-for="ticket in tickets">
+                <h2 class="headline">{{ ticket.name }}</h2>
+                <div class="actions">
+                    <div class="lane" v-if="lanes" role="select">
+                        <div v-if="ticket.lane">
+                            {{ getLane(lanes, ticket.id).name }}
+                        </div>
                     </div>
-                </li>
-            </ul>
-        </div>
-    </section>
+                </div>
+            </div>
+        </section>
+    </div>
 </template>
 
 <style scoped>
-    .overview {
-        display: flex;
-        flex-direction: row;
-        justify-content: space-between;
+    .dashboard {
         /* 100vh - hader-height - body padding top/bottom - footer */
         height: calc(100vh -(var(--header-height) + var(--footer-height) + 20px));
     }
-    .swimlane {
-        border: 1px solid #000;
-        padding: 15px;
-        flex-grow: 1;
-        overflow-y: scroll;
-
-        h2 {
-            margin-bottom: 15px;
-        }
-
-        ul {
-            list-style: none;
-        }
+    .overview {
+        display: flex;
+        align-items: start;
+        gap: 5px;
+        flex-wrap: wrap;
+        flex-direction: row;
     }
     .ticket {
-        display: flex;
-        padding: 5px;
+        display: inline-block;
+        padding: 10px;
         border: 1px solid var(--ticket-color);
         border-radius: 7.5px;
-        margin-bottom: 10px;
+        flex-grow: 1;
+        min-width: 200px;
 
-        .actions {
-            flex-grow: 1;
-            display: flex;
-            justify-content: flex-end;
-
-            button {
-                padding: 2px 5px;
-                border: none;
-                border-bottom: 2px solid gray;
-                margin-right: 2px;
-                border-radius: 2px;
-            }
+        .headline {
+            font-size: 1.2rem;
+            margin-bottom: 10px;
         }
     }
 </style>

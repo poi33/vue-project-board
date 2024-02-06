@@ -4,6 +4,7 @@ Created to learn vue and create a personal project managing board
 
 Notes/plans:
  * Save ticket position :D
+ * Tests for different features
  * Database (Graphql?) && drop json file load/save
  * Change swimlane position
  * Change swimlane name

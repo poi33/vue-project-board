@@ -1,44 +1,48 @@
 {
-    "swimlanes": [
+    "lanes": [
         {
             "id": 1,
-            "name": "Unassigned",
-            "items": [1, 2, 3]
+            "name": "Backlog"
         },
         {
             "id": 2,
-            "name": "Backlog",
-            "items": [4, 5, 6]
+            "name": "In Progress"
         },
         {
             "id": 3,
-            "name": "In progress"
-        },
-        {
-            "id": 4,
             "name": "Done"
         }
     ],
-    "items": [
+    "tickets": [
         {
             "id": 1,
-            "name": "Task 1"
+            "name": "Task 1",
+            "description": "Description ticket 1",
+            "status": "High",
+            "lane": 3
         },
         {
             "id": 2,
-            "name": "Task 2"
+            "name": "Task 2",
+            "description": "Description ticket 2",
+            "status": "Low",
+            "lane": 2
         },
         {
             "id": 3,
-            "name": "Task 3"
+            "name": "Task 3",
+            "description": "Test",
+            "lane": 0
         },
         {
             "id": 4,
-            "name": "Task 4"
+            "name": "Task 4",
+            "status": "High"
         },
         {
             "id": 5,
-            "name": "Task 5"
+            "name": "Task 5",
+            "status": "Low"
         },
         {
             "id": 6,
