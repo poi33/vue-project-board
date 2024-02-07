@@ -1,6 +1,7 @@
 type LaneData = {
     id: number,
     name: string,
+    color?: string,
     isDefault?: boolean,
 }
 
@@ -8,11 +9,13 @@ export default class Lane implements LaneData {
     public id: number;
     public name: string;
     public isDefault?: boolean;
+    public color?: string;
     private static defaultLane: Lane;
 
-    constructor(id: number, name: string) {
+    constructor(id: number, name: string, color?: string) {
         this.id = id;
         this.name = name;
+        this.color = color;
     }
 
     setName(name: string) {
@@ -24,6 +27,10 @@ export default class Lane implements LaneData {
      */
     getLane(): Lane {
         return this;
+    }
+
+    setColor(color: string) {
+        this.color = color;
     }
 
     /*

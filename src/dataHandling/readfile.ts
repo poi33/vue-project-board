@@ -21,9 +21,11 @@ export function getJsonData() {
         const lanes = new Map<number, Lane>();
         json.lanes.forEach((el: any) => {
             if (el.isDefault) {
-                Lane.setDefaultLane(new Lane(el.id, el.name));
+                Lane.setDefaultLane(
+                    new Lane(el.id, el.name, el.color)
+                );
             }
-            lanes.set(el.id, new Lane(el.id, el.name));
+            lanes.set(el.id, new Lane(el.id, el.name, el.color));
         });
 
         return { tickets, lanes };

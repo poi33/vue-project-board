@@ -1,66 +1,66 @@
 <script setup lang="ts">
-    import Dashboard from './components/Dashboard.vue';
+import { ref } from 'vue';
+import MainDashboard from '@/components/MainDashboard.vue';
+
+const leftMenu = ref(false);
+const menu = [
+    {
+        name: "Dashboard",
+        icon: "dashboard",
+    },
+    {
+        name: "Settings",
+        icon: "settings",
+    }
+];
 
 function newTicket() {
     //Open new ticket modal
     console.log("new ticket");
 }
+
+function toggleLeftMenu() {
+    leftMenu.value = !leftMenu.value;
+}
+
 </script>
 
 <template>
     <main>
-        <header>
-            <div class="title">
-                <h1>Dashboard</h1>
-            </div>
-            <div class="actions">
-                <button @click="newTicket" class="ticket-btn">New ticket</button>
-            </div>
-        </header>
-        <Dashboard />
-        <footer>
-            Created by <a href="github.com/poi33">Poi33</a>
-        </footer>
+        <q-layout view="lHh LpR lFf">
+            <q-header>
+                <q-toolbar>
+                    <q-btn 
+                        flat round dense icon="menu"
+                        @click="toggleLeftMenu"
+                    />
+                    <q-space />
+                </q-toolbar>
+            </q-header>
+            <q-page-container>
+                <MainDashboard/>
+            </q-page-container>
+            <q-footer>
+                Created by <a href="github.com/poi33">Poi33</a>
+            </q-footer>
+            <q-drawer
+                v-model="leftMenu">
+                <template v-for="item in menu">
+                    <q-list>
+                        <q-item clickable>
+                            <q-item-section avatar>
+                                <q-icon :name="item.icon" />
+                            </q-item-section>
+                            <q-item-section>
+                                <q-item-label >{{item.name}}</q-item-label>
+                            </q-item-section>
+                        </q-item>
+                        <q-separator />
+                    </q-list>
+                </template>
+            </q-drawer>
+        </q-layout>
     </main>
 </template>
 
-<style>
-main {
-    padding: 10px;
-    background-color: var(--color-bg);
-    color: var(--color-text);
-}
-header {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    height: 75px;
-    align-items: center;
-
-    h1 {
-        margin-bottom: 5px;
-    }
-
-    .actions {
-        justify-self: end;
-
-        .ticket-btn {
-            background-color: var(--btn-bg);
-            border: none;
-            border-radius: 30px;
-            padding: 10px 15px;
-            font-size: 1rem;
-            color: var(--btn-text);
-
-            &:active {
-                margin-top: 2px;
-                box-shadow: none;
-            }
-        }
-    }
-}
-footer {
-    height: var(--footer-height);
-
-    font-size: 0.8rem;
-}
-</style>
+<style scoped></style>

@@ -15,7 +15,8 @@
         {
             "id": 4,
             "name": "Unassigned",
-            "isDefault": true
+            "isDefault": true,
+            "color": "negative"
         }
     ],
     "tickets": [
