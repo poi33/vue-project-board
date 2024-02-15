@@ -2,21 +2,23 @@
     "lanes": [
         {
             "id": 1,
-            "name": "Backlog"
-        },
-        {
-            "id": 2,
-            "name": "In Progress"
-        },
-        {
-            "id": 3,
-            "name": "Done"
-        },
-        {
-            "id": 4,
             "name": "Unassigned",
             "isDefault": true,
             "color": "negative"
+        },
+        {
+            "id": 2,
+            "name": "Backlog"
+        },
+        {
+            "id": 3,
+            "name": "In Progress",
+            "color": "accent"
+        },
+        {
+            "id": 4,
+            "name": "Done",
+            "color": "positive"
         }
     ],
     "tickets": [
@@ -29,7 +31,7 @@
         },
         {
             "id": 2,
-            "name": "Task 2",
+            "name": "Any name",
             "description": "Description ticket 2",
             "status": "Low",
             "lane": 2
@@ -38,6 +40,7 @@
             "id": 3,
             "name": "Task 3",
             "description": "Test",
+            "status": "Medium",
             "lane": 1
         },
         {
