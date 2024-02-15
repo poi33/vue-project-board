@@ -3,13 +3,13 @@
 Created to learn vue and create a personal project managing board
 
 Notes/plans:
- * Save ticket position :D
+ * Change ticket position (in progress)
+ * Change swimlane position (in progress)
  * Tests for different features
  * Database (Graphql?) && drop json file load/save
- * Change swimlane position
  * Change swimlane name
  * Change ticket name and description
- * ~~Change ticket position~~
+ * ~~Add UI framework~~
 
 ## How to setup the project
     npm instal
