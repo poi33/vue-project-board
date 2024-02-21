@@ -1,0 +1,28 @@
+[{
+  "_id": {
+    "$oid": "65d607d5458ce5e51ed5bca3"
+  },
+  "name": "Unassigned",
+  "isDefault": true,
+  "color": "negative"
+},
+{
+  "_id": {
+    "$oid": "65d607d5458ce5e51ed5bca4"
+  },
+  "name": "Backlog"
+},
+{
+  "_id": {
+    "$oid": "65d607d5458ce5e51ed5bca5"
+  },
+  "name": "In Progress",
+  "color": "accent"
+},
+{
+  "_id": {
+    "$oid": "65d607d5458ce5e51ed5bca6"
+  },
+  "name": "Done",
+  "color": "positive"
+}]

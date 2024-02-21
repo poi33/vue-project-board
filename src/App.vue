@@ -38,7 +38,9 @@ function toggleLeftMenu() {
                 </q-toolbar>
             </q-header>
             <q-page-container>
-                <MainDashboard/>
+                <Suspense>
+                    <MainDashboard/>
+                </Suspense>
             </q-page-container>
             <q-footer>
                 Created by <a href="github.com/poi33">Poi33</a>

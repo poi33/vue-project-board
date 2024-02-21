@@ -1,7 +1,7 @@
 type TicketData = {
-    id: number;
+    _id: string;
     name: string;
-    lane?: number;
+    lane?: string; // Id to the string
     description?: string;
     status?: string;
 }
@@ -11,14 +11,14 @@ type TicketData = {
  * Modeled to be a mirror of the data in the database.
  */
 export default class Ticket implements TicketData {
-    public id: number;
+    public _id: string;
     public name: string;
-    public lane?: number;
+    public lane?: string;
     public description?: string;
     public status?: string;
 
-    constructor(id: number, name: string, lane?: number, description?: string, status?: string) {
-        this.id = id;
+    constructor(_id: string, name: string, lane?: string, description?: string, status?: string) {
+        this._id = _id;
         this.name = name;
         this.lane = lane;
         this.description = description;
@@ -37,7 +37,7 @@ export default class Ticket implements TicketData {
         this.name = name;
     }
 
-    setLane(number: number) {
-        this.lane = number;
+    setLane(laneId: string) {
+        this.lane = laneId;
     }
 }

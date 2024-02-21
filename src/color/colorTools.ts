@@ -3,7 +3,6 @@
  * Attempt to have be one place to change all status colors.
  */
 export function getStatusColor(status: string) {
-    console.log('status', status);
     switch (status) {
         case 'High' :
             return 'negative';

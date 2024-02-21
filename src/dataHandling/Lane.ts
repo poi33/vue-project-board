@@ -1,19 +1,19 @@
 type LaneData = {
-    id: number,
+    _id: string,
     name: string,
     color?: string,
     isDefault?: boolean,
 }
 
 export default class Lane implements LaneData {
-    public id: number;
+    public _id: string;
     public name: string;
     public isDefault?: boolean;
     public color?: string;
     private static defaultLane: Lane;
 
-    constructor(id: number, name: string, color?: string) {
-        this.id = id;
+    constructor(_id: string, name: string, color?: string) {
+        this._id = _id;
         this.name = name;
         this.color = color;
     }

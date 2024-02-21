@@ -14,6 +14,8 @@ dist-ssr
 coverage
 *.local
 
+/DBdata/*
+!/DBdata/.gitkeep
 /cypress/videos/
 /cypress/screenshots/
 

@@ -2,19 +2,19 @@
 import { ref } from 'vue';
 import Ticket from '@/dataHandling/Ticket';
 import Lane from '@/dataHandling/Lane';
-import { getJsonData } from '@/dataHandling/readfile';
+import { getData } from '@/dataHandling/dataFromApi';   
 import LaneTab from '@/components/LaneTab.vue';
 
-const data = ref(getJsonData());
-const lanes: Map<number, Lane> = data.value?.lanes || new Map<number, Lane>();
-const tickets: Map<number, Ticket> = data.value?.tickets || new Map<number, Ticket>();
-const ticketByLane = orderByLane(tickets);
+const data = await ref(getData()).value;
+const lanes: Map<String, Lane> | undefined = data?.lanes;
+const tickets: Map<String, Ticket> | undefined = data?.tickets;
+const ticketByLane = orderByLane(tickets || new Map<String, Ticket>());
 const laneTab = ref(Lane.getDefaultLane().name);
 
-function orderByLane(tickets: Map<number, Ticket>) {
-    const orderedTickets: Map<number, Ticket[]> = new Map<number, Ticket[]>();
+function orderByLane(tickets: Map<String, Ticket>) {
+    const orderedTickets: Map<String, Ticket[]> = new Map<String, Ticket[]>();
     for (const [ticketid, ticket] of tickets) {
-        const laneid = ticket.lane || Lane.getDefaultLane().id;
+        const laneid = ticket.lane || Lane.getDefaultLane()._id;
         if (orderedTickets.has(laneid)) {
             orderedTickets.get(laneid)?.push(ticket);
         } else {
@@ -46,3 +46,4 @@ function orderByLane(tickets: Map<number, Ticket>) {
         </div>
     </q-page>
 </template>
+@/dataHandling/DataBaseConnect

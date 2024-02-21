@@ -20,7 +20,7 @@ const props = defineProps({
 </script>
 
 <template>
-    <div :class="props.class + ' lanetab'" v-if="props.tickets.length > 0" :key="ticket.id" v-for="ticket in props.tickets">
+    <div :class="props.class + ' lanetab'" v-if="props.tickets.length > 0" :key="ticket._id" v-for="ticket in props.tickets">
         <TicketItem :ticket="ticket" :lane="lane" />
     </div>
     <div :class="props.class + ' lanetab'" v-else>
