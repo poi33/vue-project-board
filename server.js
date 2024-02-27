@@ -24,27 +24,26 @@ app.get("/api", async (_, res) => {
   const result = await run().catch(console.dir);
 
   res.json(result);
-
-  async function run() {
-    try {
-      // Connect the client to the server (optional starting in v4.7)
-      await client.connect();
-      // Send a ping to confirm a successful connection
-      const db = client.db("project");
-      const collection = db.collection("tickets");
-      const tickets = await collection.find({}).toArray();
-      const lanes = await db.collection("lanes").find({}).toArray();
-
-      return {
-        tickets,
-        lanes
-      };
-    } finally {
-      // Ensures that the client will close when you finish/error
-      await client.close();
-    }
-  }
 });
+
+async function run() {
+  try {
+    await client.connect();
+
+    const db = client.db("project");
+    const collection = db.collection("tickets");
+    const tickets = await collection.find({}).toArray();
+    const lanes = await db.collection("lanes").find({}).toArray();
+
+    return {
+      tickets,
+      lanes
+    };
+  } finally {
+    // Ensures that the client will close when you finish/error
+    await client.close();
+  }
+}
 
 
 ViteExpress.bind(app, server);

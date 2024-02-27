@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import Lane from '@/dataHandling/Lane';
-import Ticket from '@/dataHandling/Ticket';
+import Lane from '@/data/Lane';
+import Ticket from '@/data/Ticket';
 import { getStatusColor } from '@/color/colorTools';
 import { ref, defineProps, computed } from 'vue';
 

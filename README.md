@@ -2,13 +2,21 @@
 
 Created to learn vue and create a personal project managing board
 
+Database: MongoDB
+Server: Nodejs
+Bundler/development: Vite
+Frontend: Vue.js
+UI Framework: Quasar
+
+
 Notes/plans:
  * Change ticket position (in progress)
  * Change swimlane position (in progress)
- * Tests for different features
- * Database (Graphql?) && drop json file load/save
+ * Tests for different features. Testing framework?
  * Change swimlane name
  * Change ticket name and description
+ * Login / account for accessing the site
+ * ~~Database (Graphql?)~~
  * ~~Add UI framework~~
 
 ## How to setup the project
@@ -19,4 +27,4 @@ Notes/plans:
     npm run dev
 
 ## Release
-    Working on the full release
+    Working on first version

@@ -1,5 +1,5 @@
-import Ticket from '@/dataHandling/Ticket';
-import Lane from '@/dataHandling/Lane';
+import Ticket from '@/data/Ticket';
+import Lane from '@/data/Lane';
 
 export async function getData() {
     const response = await fetch('/api',

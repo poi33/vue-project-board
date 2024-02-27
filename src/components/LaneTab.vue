@@ -1,8 +1,8 @@
 <script setup lang="ts">
 import { ref, defineProps, computed } from 'vue';
-import TicketItem from './TicketItem.vue';
-import type Ticket from '@/dataHandling/Ticket';
-import Lane from '@/dataHandling/Lane';
+import TicketItem from './TicketListItem.vue';
+import type Ticket from '@/data/Ticket';
+import Lane from '@/data/Lane';
 
 const props = defineProps({
     class: {

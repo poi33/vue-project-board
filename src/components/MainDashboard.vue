@@ -1,8 +1,8 @@
 <script setup lang="ts">
 import { ref } from 'vue';
-import Ticket from '@/dataHandling/Ticket';
-import Lane from '@/dataHandling/Lane';
-import { getData } from '@/dataHandling/dataFromApi';   
+import Ticket from '@/data/Ticket';
+import Lane from '@/data/Lane';
+import { getData } from '@/data/dataFromApi';
 import LaneTab from '@/components/LaneTab.vue';
 
 const data = await ref(getData()).value;
